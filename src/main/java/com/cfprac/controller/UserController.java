@@ -2,6 +2,7 @@ package com.cfprac.controller;
 
 import com.cfprac.model.User;
 import com.cfprac.service.UserService;
+import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 
+//@Hidden at the controller class level will hide all the endpoints of the controller class
+//@Hidden
 @Slf4j
 @RestController
 @RequestMapping("/user")
@@ -28,6 +31,8 @@ public class UserController {
         this.userService = userService;
     }
 
+    //@Hidden can be used to hide an endpoint in the api documentation
+    @Hidden
     //By default, endpoints are grouped by controllers in the generated API doc. @Tag can be used at the method or class(Controller) level to group related APIs together.
     //APIs are categorized according to @Tag on the endpoints.
     @Tag(name="User Read API", description = "API to add, update, delete and find user")
@@ -68,6 +73,7 @@ public class UserController {
         User savedUser = userService.saveUser(user);
         return ResponseEntity.ok().body(savedUser);
     }
+
 
     @Tag(name="User Update API", description = "API to add, update, delete and find user")
     @PutMapping("/deleteUser/{id}")
